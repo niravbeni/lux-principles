@@ -1,9 +1,7 @@
 "use client";
 
 import { useStore } from "@/store/useStore";
-import VoiceInput from "./VoiceInput";
 import { motion } from "framer-motion";
-import { useCallback } from "react";
 
 export default function ScenarioBar() {
   const {
@@ -14,13 +12,6 @@ export default function ScenarioBar() {
     isLoading,
     aiOutput,
   } = useStore();
-
-  const handleVoiceTranscript = useCallback(
-    (text: string) => {
-      setScenarioText(text);
-    },
-    [setScenarioText]
-  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,13 +42,10 @@ export default function ScenarioBar() {
             }
           }}
           placeholder="Describe a scenario to apply the principles... e.g. A new customer is anxious about starting their treatment plan and unsure if the product is right for them."
-          className="w-full h-full p-3 pr-14 text-sm leading-relaxed text-foreground bg-background/60 border border-border/50 rounded-xl resize-none placeholder:text-text-secondary/35 focus:outline-none focus:ring-2 focus:ring-accent-p3/30 focus:border-accent-p3/30 transition-all"
+          className="w-full h-full p-3 text-sm leading-relaxed text-foreground bg-background/60 border border-border/50 rounded-xl resize-none placeholder:text-text-secondary/35 focus:outline-none focus:ring-2 focus:ring-accent-p3/30 focus:border-accent-p3/30 transition-all"
           disabled={isLoading}
           aria-label="Scenario input"
         />
-        <div className="absolute top-2.5 right-2.5">
-          <VoiceInput onTranscript={handleVoiceTranscript} disabled={isLoading} />
-        </div>
       </div>
 
       {/* Bottom toolbar: char count + buttons */}
