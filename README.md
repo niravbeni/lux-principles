@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Experience Principles Engine
+
+A responsive web application that serves as a living operating system for the Experience Team. It presents five foundational principles and includes an AI assistant (GPT-4o-mini) that analyzes scenarios and generates structured, actionable guidance mapped to relevant principles.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- An OpenAI API key ([get one here](https://platform.openai.com/api-keys))
+
+### Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Add your OpenAI API key to `.env.local`:
+
+```
+OPENAI_API_KEY=sk-your-key-here
+```
+
+3. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Principle Dashboard** — Five interactive cards with hover, expand, and AI-activated states
+- **AI Scenario Engine** — Enter or dictate a scenario; GPT-4o-mini maps it to relevant principles with actionable recommendations
+- **Voice Input** — Browser-native speech recognition (Web Speech API) for hands-free input
+- **Animated Highlighting** — Activated principles glow subtly when the AI determines they apply
+- **Fully Responsive** — Works across desktop, tablet, and mobile (iOS & Android)
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js 16** (App Router)
+- **React 19** + TypeScript
+- **TailwindCSS 4**
+- **Framer Motion** (animations)
+- **Zustand** (state management)
+- **OpenAI API** (GPT-4o-mini)
+- **Web Speech API** (voice input)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Deploy to Vercel:
 
-## Deploy on Vercel
+```bash
+npx vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Set `OPENAI_API_KEY` in your Vercel project's environment variables.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+src/
+  app/
+    layout.tsx          — Root layout, Inter font, metadata
+    page.tsx            — Main page composing all sections
+    globals.css         — Tailwind theme + custom animations
+    api/analyze/route.ts — AI endpoint (GPT-4o-mini)
+  components/
+    Hero.tsx            — Title and introduction
+    PrincipleDashboard.tsx — Card grid/scroll layout
+    PrincipleCard.tsx   — Interactive principle card
+    AIEngine.tsx        — AI section container
+    ScenarioInput.tsx   — Text input + voice + submit
+    VoiceInput.tsx      — Speech recognition button
+    GuidanceOutput.tsx  — Rendered AI guidance
+    Footer.tsx          — Page footer
+  data/principles.ts    — The five principles
+  store/useStore.ts     — Global state
+  types/index.ts        — TypeScript types
+```
