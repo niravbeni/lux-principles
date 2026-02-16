@@ -1,6 +1,6 @@
-# Experience Principles Engine
+# ⚖️ Experience Principles Engine
 
-A responsive web application that serves as a living operating system for the Experience Team. It presents five foundational principles and includes an AI assistant (GPT-4o-mini) that analyzes scenarios and generates structured, actionable guidance mapped to relevant principles.
+A responsive web application that serves as a living operating system for the Experience Team. It presents six foundational principles in a 2x3 grid and includes an AI assistant (GPT-4o-mini) that analyzes real-world scenarios and generates structured, actionable guidance mapped to relevant principles.
 
 ## Getting Started
 
@@ -33,18 +33,32 @@ npm run dev
 
 ## Features
 
-- **Principle Dashboard** — Five interactive cards with hover, expand, and AI-activated states
+- **Six Principle Cards** — Interactive 2x3 grid with unique accent colors per principle
 - **AI Scenario Engine** — Enter or dictate a scenario; GPT-4o-mini maps it to relevant principles with actionable recommendations
 - **Voice Input** — Browser-native speech recognition (Web Speech API) for hands-free input
-- **Animated Highlighting** — Activated principles glow subtly when the AI determines they apply
-- **Fully Responsive** — Works across desktop, tablet, and mobile (iOS & Android)
+- **Activated Card States** — Activated principles highlight with a full border and glow; non-activated cards grey out
+- **Slide-up Guidance Panel** — AI output appears as a slide-up panel with a flat, scrollable list of recommendations per principle
+- **Scroll-snap Layout** — Hero section snaps to a full-viewport engine view on scroll
+- **Diagonal Cascade Animation** — Cards animate in from top-left to bottom-right using Framer Motion when the section comes into view
+- **Fully Responsive** — 2x3 grid on desktop, horizontal scroll on mobile
+
+## The Six Principles
+
+| ID | Principle | Color |
+|----|-----------|-------|
+| P1 | Lead with Accessible Expertise | Pink |
+| P2 | See the Person, Serve the Vision | Warm Gold |
+| P3 | Fold Care into Every Interaction | Teal |
+| P4 | Celebrate Momentum to Fuel Confidence | Blue |
+| P5 | Invite Trust, Never Assume It | Lavender |
+| P6 | Pair Intelligence with Reassurance | Sage Green |
 
 ## Tech Stack
 
 - **Next.js 16** (App Router)
 - **React 19** + TypeScript
 - **TailwindCSS 4**
-- **Framer Motion** (animations)
+- **Framer Motion** (animations + useInView)
 - **Zustand** (state management)
 - **OpenAI API** (GPT-4o-mini)
 - **Web Speech API** (voice input)
@@ -53,31 +67,27 @@ npm run dev
 
 Deploy to Vercel:
 
-```bash
-npx vercel
-```
-
-Set `OPENAI_API_KEY` in your Vercel project's environment variables.
+1. Import the repo at [vercel.com/new](https://vercel.com/new)
+2. Set `OPENAI_API_KEY` in **Settings > Environment Variables**
+3. Deploy — Vercel auto-detects Next.js, no config needed
 
 ## Project Structure
 
 ```
 src/
   app/
-    layout.tsx          — Root layout, Inter font, metadata
-    page.tsx            — Main page composing all sections
-    globals.css         — Tailwind theme + custom animations
-    api/analyze/route.ts — AI endpoint (GPT-4o-mini)
+    layout.tsx            — Root layout, Inter font, metadata, favicon
+    page.tsx              — Scroll-snap hero + engine sections
+    globals.css           — Tailwind theme, scroll-snap, custom animations
+    api/analyze/route.ts  — AI endpoint (GPT-4o-mini, rate-limited)
   components/
-    Hero.tsx            — Title and introduction
-    PrincipleDashboard.tsx — Card grid/scroll layout
-    PrincipleCard.tsx   — Interactive principle card
-    AIEngine.tsx        — AI section container
-    ScenarioInput.tsx   — Text input + voice + submit
-    VoiceInput.tsx      — Speech recognition button
-    GuidanceOutput.tsx  — Rendered AI guidance
-    Footer.tsx          — Page footer
-  data/principles.ts    — The five principles
-  store/useStore.ts     — Global state
-  types/index.ts        — TypeScript types
+    Hero.tsx              — Title, subtitle, scroll indicator
+    EngineView.tsx        — 2x3 card grid + scenario bar + guidance panel
+    PrincipleCard.tsx     — Interactive card with activated/greyed states
+    ScenarioBar.tsx       — Textarea input with voice + submit
+    VoiceInput.tsx        — Speech recognition button
+    GuidancePanel.tsx     — Slide-up AI output panel
+  data/principles.ts      — The six principles
+  store/useStore.ts       — Global state (Zustand)
+  types/index.ts          — TypeScript interfaces
 ```

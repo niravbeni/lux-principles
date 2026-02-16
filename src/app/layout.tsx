@@ -17,7 +17,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Experience Principles Engine",
   description:
-    "A living operating system for experience design — five foundational principles that guide every decision.",
+    "A living operating system for experience design — six foundational principles that guide every decision.",
+  icons: {
+    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>",
+  },
 };
 
 export default function RootLayout({
