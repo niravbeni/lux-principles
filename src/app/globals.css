@@ -6,12 +6,12 @@
   --color-text-secondary: #6b7280;
   --color-card-surface: #ffffff;
   --color-border: #e8e8e4;
-  --color-accent-p1: #e8a0bf;
-  --color-accent-p2: #d4a574;
-  --color-accent-p3: #7ec8b8;
-  --color-accent-p4: #8b9fd4;
-  --color-accent-p5: #b8a9d4;
-  --color-accent-p6: #8bc4a8;
+  --color-accent-p1: #1B61D1;
+  --color-accent-p2: #C792D8;
+  --color-accent-p3: #92D89C;
+  --color-accent-p4: #FFC943;
+  --color-accent-p5: #667D67;
+  --color-accent-p6: #1B3277;
   --font-sans: var(--font-inter);
 }
 

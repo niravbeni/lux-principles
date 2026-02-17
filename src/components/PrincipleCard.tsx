@@ -18,15 +18,12 @@ export default function PrincipleCard({ principle }: PrincipleCardProps) {
     <motion.div
       className="relative flex flex-col h-full rounded-2xl overflow-hidden select-none"
       style={{
-        backgroundColor: isGreyedOut
-          ? "#f0f0ee"
-          : `${principle.accentColor}14`,
         border: isActivated
           ? `2px solid ${principle.accentColor}`
           : "2px solid transparent",
         boxShadow: isActivated
-          ? `0 0 28px 4px ${principle.accentColor}50, 0 2px 8px rgba(0,0,0,0.06)`
-          : "0 1px 3px rgba(0,0,0,0.03)",
+          ? `0 0 28px 4px ${principle.accentColor}60, 0 2px 8px rgba(0,0,0,0.1)`
+          : "0 1px 4px rgba(0,0,0,0.06)",
       }}
       animate={{
         opacity: isGreyedOut ? 0.5 : 1,
@@ -36,70 +33,55 @@ export default function PrincipleCard({ principle }: PrincipleCardProps) {
         y: -3,
         opacity: 1,
         boxShadow: isActivated
-          ? `0 0 36px 6px ${principle.accentColor}60, 0 4px 16px rgba(0,0,0,0.08)`
-          : `0 4px 20px ${principle.accentColor}25, 0 2px 8px rgba(0,0,0,0.04)`,
+          ? `0 0 36px 6px ${principle.accentColor}70, 0 4px 16px rgba(0,0,0,0.12)`
+          : `0 4px 20px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)`,
       }}
       transition={{ duration: 0.4, ease: "easeOut" }}
       role="article"
       aria-label={principle.title}
       tabIndex={0}
     >
-      {/* Activated glow overlay */}
-      <AnimatePresence>
-        {isActivated && (
-          <motion.div
-            className="absolute inset-0 pointer-events-none glow-animation rounded-2xl"
-            style={{
-              background: `linear-gradient(160deg, ${principle.accentColor}18 0%, ${principle.accentColor}30 100%)`,
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Icon - bottom right corner, desktop only */}
-      <span
-        className="absolute bottom-3 right-3 text-3xl leading-none pointer-events-none z-10 transition-opacity duration-400 hidden md:block"
-        style={{ opacity: isGreyedOut ? 0.3 : 1 }}
-        role="img"
-        aria-label={principle.id}
+      {/* Top colored bar with title */}
+      <div
+        className="flex-shrink-0 px-4 py-3 md:px-5 md:py-4 relative"
+        style={{ backgroundColor: isGreyedOut ? "#c0c0bc" : principle.accentColor }}
       >
-        {principle.icon}
-      </span>
-
-      <div className="p-4 md:p-5 flex flex-col flex-1 min-h-0 relative z-10 transition-all duration-400">
-        {/* Top: Active indicator */}
+        {/* Active indicator */}
         <AnimatePresence>
           {isActivated && (
-            <motion.div className="flex items-center mb-2 flex-shrink-0">
-              <motion.span
-                className="flex items-center gap-1 px-1.5 py-0.5 text-[9px] font-bold tracking-wide uppercase rounded-full"
-                style={{
-                  backgroundColor: `${principle.accentColor}25`,
-                  color: principle.accentColor,
-                }}
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.7 }}
-                transition={{ duration: 0.3 }}
-              >
-                <span
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{ backgroundColor: principle.accentColor }}
-                />
-                Active
-              </motion.span>
-            </motion.div>
+            <motion.span
+              className="absolute top-2 right-2 flex items-center gap-1 px-1.5 py-0.5 text-[9px] font-bold tracking-wide uppercase rounded-full bg-white/25 text-white"
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.7 }}
+              transition={{ duration: 0.3 }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
+              Active
+            </motion.span>
           )}
         </AnimatePresence>
 
-        {/* Title - two lines */}
-        <h3 className="text-base md:text-lg font-bold text-foreground leading-snug mb-3 md:mb-4 flex-shrink-0 whitespace-pre-line">
+        {/* Title - clamped to exactly 2 lines for consistency */}
+        <h3 className="text-[13px] sm:text-base md:text-lg font-bold text-white leading-snug pr-12 line-clamp-2 h-[2lh]">
           {principle.title}
         </h3>
+      </div>
+
+      {/* Bottom white area with description */}
+      <div
+        className="flex-1 min-h-0 flex flex-col p-4 md:p-5 relative"
+        style={{ backgroundColor: isGreyedOut ? "#f0f0ee" : "#ffffff" }}
+      >
+        {/* Icon - bottom right corner, desktop only */}
+        <span
+          className="absolute bottom-3 right-3 text-2xl md:text-3xl leading-none pointer-events-none transition-opacity duration-400 hidden md:block"
+          style={{ opacity: isGreyedOut ? 0.3 : 1 }}
+          role="img"
+          aria-label={principle.id}
+        >
+          {principle.icon}
+        </span>
 
         {/* Description - scrollable if needed */}
         <p className="text-[11px] md:text-xs text-text-secondary leading-relaxed flex-1 min-h-0 overflow-y-auto thin-scrollbar md:pr-8">
