@@ -68,4 +68,12 @@ export const useStore = create<AppState>((set, get) => ({
       errorState: null,
       expandedCardId: null,
     }),
+
+  dismissPanel: () =>
+    set({
+      activatedPrincipleIds: [],
+      aiOutput: null,
+      isLoading: false,
+      errorState: null,
+    }),
 }));

@@ -31,4 +31,5 @@ export interface AppState {
   setExpandedCardId: (id: string | null) => void;
   submitScenario: () => Promise<void>;
   resetScenario: () => void;
+  dismissPanel: () => void;
 }

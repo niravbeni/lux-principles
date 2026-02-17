@@ -5,7 +5,7 @@ import { useStore } from "@/store/useStore";
 import { principles } from "@/data/principles";
 
 export default function GuidancePanel() {
-  const { aiOutput, isLoading, errorState, resetScenario } = useStore();
+  const { aiOutput, isLoading, errorState, dismissPanel } = useStore();
 
   return (
     <motion.div
@@ -30,7 +30,7 @@ export default function GuidancePanel() {
             </span>
           </div>
           <button
-            onClick={resetScenario}
+            onClick={dismissPanel}
             className="text-xs text-text-secondary hover:text-foreground transition-colors cursor-pointer px-2 py-1 rounded-md hover:bg-card-surface"
             aria-label="Close guidance panel"
           >
@@ -102,14 +102,8 @@ export default function GuidancePanel() {
                       >
                         {/* Principle header */}
                         <div className="flex items-center gap-2 mb-1.5">
-                          <span
-                            className="text-[10px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded"
-                            style={{
-                              color: principle.accentColor,
-                              backgroundColor: `${principle.accentColor}18`,
-                            }}
-                          >
-                            {principle.id}
+                          <span className="text-base leading-none">
+                            {principle.icon}
                           </span>
                           <h4 className="text-sm font-semibold text-foreground">
                             {g.title}
