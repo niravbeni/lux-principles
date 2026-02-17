@@ -22,37 +22,16 @@ export default function EngineView() {
 
   return (
     <div className="relative flex flex-col h-full bg-background overflow-hidden">
-      {/* Cards - 2x3 grid on desktop, horizontal scroll on mobile */}
-      <div className="flex-[3] min-h-0 p-3 md:p-4 lg:p-5 pb-2" ref={gridRef}>
-        {/* Mobile: horizontal scroll */}
-        <div className="flex gap-2.5 overflow-x-auto hide-scrollbar h-full md:hidden">
+      {/* Cards - 3x2 grid at all sizes */}
+      <div
+        className="flex-[3] min-h-0 p-3 md:p-4 lg:p-5 pb-2"
+        ref={gridRef}
+      >
+        <div className="grid grid-cols-2 sm:grid-cols-3 grid-rows-3 sm:grid-rows-2 gap-2 sm:gap-3 lg:gap-4 h-full max-w-[1400px] mx-auto">
           {principles.map((principle, i) => (
             <motion.div
               key={principle.id}
-              className="min-w-[200px] flex-shrink-0 h-full"
-              initial={{ opacity: 0, y: 20, scale: 0.92 }}
-              animate={
-                isInView
-                  ? { opacity: 1, y: 0, scale: 1 }
-                  : { opacity: 0, y: 20, scale: 0.92 }
-              }
-              transition={{
-                duration: 0.5,
-                delay: i * 0.08,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              <PrincipleCard principle={principle} />
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Desktop: 2 rows x 3 columns grid */}
-        <div className="hidden md:grid grid-cols-3 grid-rows-2 gap-3 lg:gap-4 h-full max-w-[1400px] mx-auto">
-          {principles.map((principle, i) => (
-            <motion.div
-              key={principle.id}
-              className="h-full"
+              className="h-full min-h-0"
               initial={{ opacity: 0, y: 30, scale: 0.88 }}
               animate={
                 isInView

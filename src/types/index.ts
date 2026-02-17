@@ -3,6 +3,7 @@ export interface Principle {
   title: string;
   manifesto: string;
   description: string;
+  icon: string;
   accentColor: string;
   accentColorLight: string;
 }

@@ -60,20 +60,21 @@ export default function PrincipleCard({ principle }: PrincipleCardProps) {
         )}
       </AnimatePresence>
 
-      <div className="p-3.5 md:p-4 flex flex-col flex-1 relative z-10 overflow-hidden transition-all duration-400">
-        {/* Top: ID badge + active indicator */}
-        <div className="flex items-center justify-between mb-2">
-          <span
-            className="text-[11px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded-md transition-colors duration-400"
-            style={{
-              color: isGreyedOut ? "#9ca3af" : principle.accentColor,
-              backgroundColor: isGreyedOut ? "#9ca3af18" : `${principle.accentColor}18`,
-            }}
-          >
-            {principle.id}
-          </span>
-          <AnimatePresence>
-            {isActivated && (
+      {/* Icon - bottom right corner, desktop only */}
+      <span
+        className="absolute bottom-3 right-3 text-3xl leading-none pointer-events-none z-10 transition-opacity duration-400 hidden md:block"
+        style={{ opacity: isGreyedOut ? 0.3 : 1 }}
+        role="img"
+        aria-label={principle.id}
+      >
+        {principle.icon}
+      </span>
+
+      <div className="p-4 md:p-5 flex flex-col flex-1 min-h-0 relative z-10 transition-all duration-400">
+        {/* Top: Active indicator */}
+        <AnimatePresence>
+          {isActivated && (
+            <motion.div className="flex items-center mb-2 flex-shrink-0">
               <motion.span
                 className="flex items-center gap-1 px-1.5 py-0.5 text-[9px] font-bold tracking-wide uppercase rounded-full"
                 style={{
@@ -91,17 +92,17 @@ export default function PrincipleCard({ principle }: PrincipleCardProps) {
                 />
                 Active
               </motion.span>
-            )}
-          </AnimatePresence>
-        </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* Title */}
-        <h3 className="text-sm md:text-[15px] font-bold text-foreground leading-snug mb-1.5">
+        {/* Title - two lines */}
+        <h3 className="text-base md:text-lg font-bold text-foreground leading-snug mb-3 md:mb-4 flex-shrink-0 whitespace-pre-line">
           {principle.title}
         </h3>
 
-        {/* Description */}
-        <p className="text-xs text-text-secondary leading-relaxed flex-1">
+        {/* Description - scrollable if needed */}
+        <p className="text-[11px] md:text-xs text-text-secondary leading-relaxed flex-1 min-h-0 overflow-y-auto thin-scrollbar md:pr-8">
           {principle.description}
         </p>
       </div>

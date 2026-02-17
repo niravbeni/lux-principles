@@ -5,6 +5,16 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section className="relative flex flex-col items-start justify-center min-h-[100dvh] px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
+      {/* Top header */}
+      <motion.p
+        className="absolute top-6 left-6 md:top-8 md:left-12 lg:left-20 text-xs font-semibold tracking-[0.15em] uppercase text-foreground/70"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        Store of the Future
+      </motion.p>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
