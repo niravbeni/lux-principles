@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const PASSWORD = "phoebe2026";
+const PASSWORD = "thefutureisnow";
 const STORAGE_KEY = "lux-principles-auth";
 
 export default function PasswordGate({
