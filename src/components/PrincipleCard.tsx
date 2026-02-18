@@ -57,7 +57,7 @@ export default function PrincipleCard({ principle }: PrincipleCardProps) {
           src={PRINCIPLE_IMAGES[principle.id]}
           alt={principle.title}
           fill
-          className="object-contain object-center"
+          className="object-cover sm:object-contain object-center"
           sizes="(max-width: 640px) 35vw, 20vw"
           unoptimized
         />
