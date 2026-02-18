@@ -18,16 +18,16 @@ export default function EngineView() {
   const { aiOutput, isLoading } = useStore();
   const showPanel = aiOutput || isLoading;
   const gridRef = useRef(null);
-  const isInView = useInView(gridRef, { once: true, amount: 0.2 });
+  const isInView = useInView(gridRef, { amount: 0.2 });
 
   return (
     <div className="relative flex flex-col h-full bg-background overflow-hidden">
       {/* Cards - 3x2 grid at all sizes */}
       <div
-        className="flex-[3] min-h-0 p-3 md:p-4 lg:p-5 pb-2"
+        className="flex-[5] sm:flex-[3] min-h-0 p-2 sm:p-3 md:p-4 lg:p-5 pb-1 sm:pb-2"
         ref={gridRef}
       >
-        <div className="grid grid-cols-2 sm:grid-cols-3 grid-rows-3 sm:grid-rows-2 gap-2 sm:gap-3 lg:gap-4 h-full max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 grid-rows-3 sm:grid-rows-2 gap-1.5 sm:gap-3 lg:gap-4 h-full max-w-[1400px] mx-auto">
           {principles.map((principle, i) => (
             <motion.div
               key={principle.id}
@@ -50,9 +50,9 @@ export default function EngineView() {
         </div>
       </div>
 
-      {/* Bottom scenario input area */}
+      {/* Bottom scenario / guidance area */}
       <motion.div
-        className="flex-[2] min-h-[140px] flex flex-col p-3 md:p-4 lg:p-5 pt-2"
+        className="flex-[3] sm:flex-[2] min-h-[120px] sm:min-h-[140px] relative p-2 sm:p-3 md:p-4 lg:p-5 pt-1 sm:pt-2"
         initial={{ opacity: 0, y: 15 }}
         animate={
           isInView
@@ -66,12 +66,12 @@ export default function EngineView() {
         }}
       >
         <ScenarioBar />
-      </motion.div>
 
-      {/* Guidance panel - slides up when AI output is available */}
-      <AnimatePresence>
-        {showPanel && <GuidancePanel />}
-      </AnimatePresence>
+        {/* Guidance panel - overlays the scenario area only */}
+        <AnimatePresence>
+          {showPanel && <GuidancePanel />}
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 }

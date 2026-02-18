@@ -81,7 +81,8 @@ export default function ScenarioBar() {
         <motion.button
           type="submit"
           disabled={isLoading || !scenarioText.trim() || isOverLimit}
-          className="flex-shrink-0 px-5 py-1.5 text-sm font-semibold text-white bg-foreground rounded-lg hover:bg-foreground/90 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 transition-colors cursor-pointer"
+          className="flex-shrink-0 px-5 py-1.5 text-sm font-semibold text-white bg-foreground rounded-lg hover:bg-foreground/90 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 transition-colors"
+          style={{ cursor: isLoading || !scenarioText.trim() || isOverLimit ? "not-allowed" : "pointer" }}
           whileTap={{ scale: 0.97 }}
         >
           {isLoading ? (

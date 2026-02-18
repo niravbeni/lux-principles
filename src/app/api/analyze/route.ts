@@ -24,34 +24,37 @@ function checkRateLimit(ip: string): boolean {
   return true;
 }
 
-const SYSTEM_PROMPT = `You are an Experience Design AI assistant. Your role is to analyze user scenarios and determine which of the following six experience principles apply.
+const SYSTEM_PROMPT = `You are an Experience Design AI assistant. You analyze real-world scenarios through the lens of six experience principles. Each principle has Do's (best practices) and Don'ts (pitfalls to avoid) that shape how you think and advise.
 
 THE SIX PRINCIPLES:
+
 ${principles
   .map(
-    (p) => `- ${p.id}: "${p.title}" — ${p.description}`
+    (p) => `${p.id}: "${p.title}"
+Description: ${p.description}
+${p.dos.map((d) => `  DO: ${d.title} — ${d.detail}`).join("\n")}
+${p.donts.map((d) => `  DON'T: ${d.title} — ${d.detail}`).join("\n")}`
   )
-  .join("\n")}
+  .join("\n\n")}
 
 INSTRUCTIONS:
 1. Carefully read the user's scenario.
-2. Determine which principles are most relevant (1 to 6 may apply).
-3. For each activated principle, provide 2-4 specific, actionable recommendations tailored to the scenario.
-4. Write a concise summary (1-2 sentences) explaining the overall principle-based approach.
+2. Write "generalAdvice": 2-3 sentences of holistic guidance on how to approach this scenario, drawing on the spirit of all six principles. Give enough context to feel substantive.
+3. Pick the 1-3 principles MOST relevant to this specific scenario. Only pick more than 2 if genuinely warranted. Quality over quantity.
+4. For each activated principle, write an "insight" of 2-3 sentences. This should:
+   - Connect the principle directly to the scenario
+   - Naturally weave in the thinking behind the Do's and Don'ts without labelling them as such
+   - Feel like practical, scenario-specific advice — not a restatement of the principle
 5. Return ONLY valid JSON matching this exact structure — no markdown, no code fences, no extra text:
 
 {
   "activatedPrinciples": ["P1", "P3"],
-  "summary": "A brief summary of the principle-based approach to this scenario.",
+  "generalAdvice": "Holistic guidance on approaching this scenario, considering the full picture across all principles. Written as a short flowing paragraph.",
   "guidance": [
     {
       "principleId": "P1",
       "title": "Lead with Accessible Expertise",
-      "recommendations": [
-        "First specific recommendation",
-        "Second specific recommendation",
-        "Third specific recommendation"
-      ]
+      "insight": "A short paragraph that ties this principle to the scenario, weaving in the spirit of the do's and don'ts naturally without labelling them."
     }
   ]
 }
@@ -61,8 +64,11 @@ RULES:
 - Never include markdown formatting or code fences.
 - Never include conversational filler or explanations outside the JSON.
 - The "activatedPrinciples" array must only contain IDs from P1-P6.
+- Activate only 1-3 principles. Be selective — pick the ones that matter most for this scenario.
 - Each guidance entry must reference an activated principle.
-- Recommendations must be specific and actionable, not generic.`;
+- Each "insight" should be 2-3 sentences. Be direct and practical — every sentence should add value.
+- Do NOT use the words "Do" or "Don't" as labels. Incorporate their intent naturally into the advice.
+- Keep language warm, professional, and action-oriented.`;
 
 export async function POST(request: NextRequest) {
   try {
@@ -122,7 +128,7 @@ export async function POST(request: NextRequest) {
         { role: "user", content: scenario },
       ],
       temperature: 0.5,
-      max_tokens: 1200,
+      max_tokens: 1600,
     });
 
     const content = completion.choices[0]?.message?.content;
@@ -154,7 +160,7 @@ export async function POST(request: NextRequest) {
     if (
       !Array.isArray(parsed.activatedPrinciples) ||
       !Array.isArray(parsed.guidance) ||
-      typeof parsed.summary !== "string"
+      typeof parsed.generalAdvice !== "string"
     ) {
       console.error("Invalid AI response structure:", parsed);
       return NextResponse.json(

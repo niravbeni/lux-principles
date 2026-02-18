@@ -1,3 +1,8 @@
+export interface PrincipleGuardrail {
+  title: string;
+  detail: string;
+}
+
 export interface Principle {
   id: string;
   title: string;
@@ -6,17 +11,19 @@ export interface Principle {
   icon: string;
   accentColor: string;
   accentColorLight: string;
+  dos: PrincipleGuardrail[];
+  donts: PrincipleGuardrail[];
 }
 
 export interface Guidance {
   principleId: string;
   title: string;
-  recommendations: string[];
+  insight: string;
 }
 
 export interface AIResponse {
   activatedPrinciples: string[];
-  summary: string;
+  generalAdvice: string;
   guidance: Guidance[];
 }
 
