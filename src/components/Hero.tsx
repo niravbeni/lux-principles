@@ -42,8 +42,7 @@ export default function Hero() {
   return (
     <section ref={sectionRef} className="relative min-h-[100dvh] overflow-hidden">
       {/* Background image — cycles P1-P6, swaps while off-screen */}
-      <div className="absolute top-[25%] bottom-0 right-0 w-[80%] md:w-[65%] lg:w-[55%] pointer-events-none select-none"
-        style={{ opacity: 0.55 }}
+      <div className="absolute top-[25%] bottom-0 right-0 w-[80%] md:w-[65%] lg:w-[55%] pointer-events-none select-none opacity-50 sm:opacity-65 lg:opacity-100"
       >
         <Image
           key={imageIndex}
