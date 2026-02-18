@@ -9,7 +9,7 @@ export const principles: Principle[] = [
       "Invite trust by showing up with deep medical expertise and craftsmanship, translating complexity into accessible guidance that enables confident decisions.",
     icon: "🧭",
     accentColor: "#1B61D1",
-    accentColorLight: "rgba(27, 97, 209, 0.12)",
+    accentColorLight: "rgba(27, 97, 209, 0.1)",
     dos: [
       {
         title: "Use analogies for clarity",
@@ -53,7 +53,7 @@ export const principles: Principle[] = [
       "Observe the person's full life context and frame every product and service not as the correction for a deficit, but as a tool to unlock their unique potential.",
     icon: "👁️",
     accentColor: "#C792D8",
-    accentColorLight: "rgba(199, 146, 216, 0.12)",
+    accentColorLight: "rgba(199, 146, 216, 0.15)",
     dos: [
       {
         title: "Capture needs from full life context",
@@ -97,7 +97,7 @@ export const principles: Principle[] = [
       "Thread wellness through every moment, transforming routine into something generous with warmth and unexpected delight.",
     icon: "💝",
     accentColor: "#92D89C",
-    accentColorLight: "rgba(146, 216, 156, 0.12)",
+    accentColorLight: "rgba(146, 216, 156, 0.18)",
     dos: [
       {
         title: "Offer comfort during wait times",
@@ -141,7 +141,7 @@ export const principles: Principle[] = [
       "Reveal progress as it happens, honouring steps both small and significant to build confidence through visible change, not distant goals.",
     icon: "🚀",
     accentColor: "#FFC943",
-    accentColorLight: "rgba(255, 201, 67, 0.12)",
+    accentColorLight: "rgba(255, 201, 67, 0.15)",
     dos: [
       {
         title: "Show the long view",

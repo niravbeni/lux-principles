@@ -39,22 +39,26 @@ ${p.donts.map((d) => `  DON'T: ${d.title} — ${d.detail}`).join("\n")}`
 
 INSTRUCTIONS:
 1. Carefully read the user's scenario.
-2. Write "generalAdvice": 2-3 sentences of holistic guidance on how to approach this scenario, drawing on the spirit of all six principles. Give enough context to feel substantive.
+2. Write "generalAdvice": 2-3 sentences of holistic guidance on how to approach this scenario, drawing on the spirit of all six principles. This should feel like a wise, practical summary.
 3. Pick the 1-3 principles MOST relevant to this specific scenario. Only pick more than 2 if genuinely warranted. Quality over quantity.
-4. For each activated principle, write an "insight" of 2-3 sentences. This should:
-   - Connect the principle directly to the scenario
-   - Naturally weave in the thinking behind the Do's and Don'ts without labelling them as such
-   - Feel like practical, scenario-specific advice — not a restatement of the principle
+4. For each activated principle, provide 2-3 specific, actionable "recommendations" as an array of strings. Each recommendation should:
+   - Be a single clear sentence of practical advice tied to the scenario
+   - Naturally incorporate the thinking behind the Do's and Don'ts without labelling them
+   - Feel scenario-specific, not a generic restatement of the principle
 5. Return ONLY valid JSON matching this exact structure — no markdown, no code fences, no extra text:
 
 {
-  "activatedPrinciples": ["P1", "P3"],
-  "generalAdvice": "Holistic guidance on approaching this scenario, considering the full picture across all principles. Written as a short flowing paragraph.",
+  "activatedPrinciples": ["P2", "P3"],
+  "generalAdvice": "The approach focuses on recognizing the individual's unique needs and enhancing their experience through thoughtful interactions and care.",
   "guidance": [
     {
-      "principleId": "P1",
-      "title": "Lead with Accessible Expertise",
-      "insight": "A short paragraph that ties this principle to the scenario, weaving in the spirit of the do's and don'ts naturally without labelling them."
+      "principleId": "P2",
+      "title": "See the Person, Serve the Vision",
+      "recommendations": [
+        "Engage the customer in a conversation about their lifestyle and preferences to identify solutions that enhance their daily activities.",
+        "Offer a personalized consultation to explore options tailored to their specific context and needs.",
+        "Present each suggestion with a brief explanation of why it is relevant for this specific customer."
+      ]
     }
   ]
 }
@@ -66,8 +70,9 @@ RULES:
 - The "activatedPrinciples" array must only contain IDs from P1-P6.
 - Activate only 1-3 principles. Be selective — pick the ones that matter most for this scenario.
 - Each guidance entry must reference an activated principle.
-- Each "insight" should be 2-3 sentences. Be direct and practical — every sentence should add value.
-- Do NOT use the words "Do" or "Don't" as labels. Incorporate their intent naturally into the advice.
+- Each recommendation should be one clear, actionable sentence.
+- Provide 2-3 recommendations per principle.
+- Do NOT use the words "Do" or "Don't" as labels. Incorporate their intent naturally.
 - Keep language warm, professional, and action-oriented.`;
 
 export async function POST(request: NextRequest) {

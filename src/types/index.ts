@@ -18,7 +18,7 @@ export interface Principle {
 export interface Guidance {
   principleId: string;
   title: string;
-  insight: string;
+  recommendations: string[];
 }
 
 export interface AIResponse {

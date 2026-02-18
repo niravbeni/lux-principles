@@ -1,8 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Principle } from "@/types";
 import { useStore } from "@/store/useStore";
+
+const PRINCIPLE_IMAGES: Record<string, string> = {
+  P1: "/images/p1.png",
+  P2: "/images/p2.png",
+  P3: "/images/p3.png",
+  P4: "/images/p4.png",
+  P5: "/images/p5.png",
+  P6: "/images/p6.png",
+};
 
 interface PrincipleCardProps {
   principle: Principle;
@@ -16,7 +26,7 @@ export default function PrincipleCard({ principle }: PrincipleCardProps) {
 
   return (
     <motion.div
-      className="relative flex flex-col h-full rounded-2xl overflow-hidden select-none"
+      className="relative flex flex-row h-full overflow-hidden select-none"
       style={{
         border: isActivated
           ? `2px solid ${principle.accentColor}`
@@ -41,34 +51,39 @@ export default function PrincipleCard({ principle }: PrincipleCardProps) {
       aria-label={principle.title}
       tabIndex={0}
     >
-      {/* Top colored bar with title */}
-      <div
-        className="flex-shrink-0 px-2 py-1.5 sm:px-4 sm:py-3 md:px-5 md:py-4 lg:px-6 lg:py-5 relative"
-        style={{ backgroundColor: isGreyedOut ? "#c0c0bc" : principle.accentColor }}
-      >
-        {/* Title - single line on mobile, 2 lines on sm+ */}
-        <h3 className="text-[11px] sm:text-base md:text-lg lg:text-xl font-bold text-white leading-tight sm:leading-snug line-clamp-1 sm:line-clamp-2 sm:min-h-[2lh]">
-          {principle.title}
-        </h3>
+      {/* Left: Image area */}
+      <div className="relative w-[35%] sm:w-[38%] flex-shrink-0 overflow-hidden">
+        <Image
+          src={PRINCIPLE_IMAGES[principle.id]}
+          alt={principle.title}
+          fill
+          className="object-contain object-center"
+          sizes="(max-width: 640px) 35vw, 20vw"
+          unoptimized
+        />
+        {isGreyedOut && (
+          <div className="absolute inset-0 bg-white/50" />
+        )}
       </div>
 
-      {/* Bottom white area with description */}
+      {/* Center: Colored accent bar */}
       <div
-        className="flex-1 min-h-0 flex flex-col p-2 sm:p-4 md:p-5 lg:p-6 relative"
-        style={{ backgroundColor: isGreyedOut ? "#f0f0ee" : "#ffffff" }}
-      >
-        {/* Icon - bottom right corner, desktop only */}
-        <span
-          className="absolute bottom-3 right-3 lg:bottom-4 lg:right-4 text-2xl md:text-3xl lg:text-4xl leading-none pointer-events-none transition-opacity duration-400 hidden md:block"
-          style={{ opacity: isGreyedOut ? 0.3 : 1 }}
-          role="img"
-          aria-label={principle.id}
-        >
-          {principle.icon}
-        </span>
+        className="w-3 sm:w-4 md:w-5 lg:w-6 flex-shrink-0 self-stretch"
+        style={{ backgroundColor: isGreyedOut ? "#c0c0bc" : principle.accentColor }}
+      />
 
-        {/* Description - scrollable if needed */}
-        <p className="text-[10px] sm:text-xs md:text-sm lg:text-base text-text-secondary leading-relaxed flex-1 min-h-0 overflow-y-auto thin-scrollbar md:pr-8 lg:pr-12">
+      {/* Right: Text content — tinted background */}
+      <div
+        className="flex-1 min-w-0 flex flex-col p-2 sm:p-3 md:p-4 lg:p-5"
+        style={{ backgroundColor: isGreyedOut ? "#f0f0ee" : principle.accentColorLight }}
+      >
+        {/* Title */}
+        <h3 className="text-[10px] sm:text-sm md:text-base lg:text-lg font-bold text-foreground leading-tight mb-1 sm:mb-2 line-clamp-2">
+          {principle.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-[8px] sm:text-[10px] md:text-xs lg:text-sm text-text-secondary font-light leading-relaxed flex-1 min-h-0 overflow-y-auto thin-scrollbar">
           {principle.description}
         </p>
       </div>
