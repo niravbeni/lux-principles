@@ -184,8 +184,8 @@ export const principles: Principle[] = [
     description:
       "Ensure consent grounds every moment, building relationships with customers and patients founded on transparency, where the customer feels safe, seen, and held throughout.",
     icon: "🤝",
-    accentColor: "#667D67",
-    accentColorLight: "rgba(102, 125, 103, 0.12)",
+    accentColor: "#FF7F50",
+    accentColorLight: "rgba(255, 127, 80, 0.15)",
     dos: [
       {
         title: "Give control back",

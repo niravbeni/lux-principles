@@ -6,12 +6,12 @@ import { Principle } from "@/types";
 import { useStore } from "@/store/useStore";
 
 const PRINCIPLE_IMAGES: Record<string, string> = {
-  P1: "/images/p1.png",
-  P2: "/images/p2.png",
-  P3: "/images/p3.png",
-  P4: "/images/p4.png",
-  P5: "/images/p5.png",
-  P6: "/images/p6.png",
+  P1: "/images/principle1.png",
+  P2: "/images/principle2.png",
+  P3: "/images/principle3.png",
+  P4: "/images/principle4.png",
+  P5: "/images/principle5.png",
+  P6: "/images/principle6.png",
 };
 
 interface PrincipleCardProps {
