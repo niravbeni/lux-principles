@@ -96,8 +96,8 @@ export const principles: Principle[] = [
     description:
       "Thread wellness through every moment, transforming routine into something generous with warmth and unexpected delight.",
     icon: "💝",
-    accentColor: "#92D89C",
-    accentColorLight: "rgba(146, 216, 156, 0.18)",
+    accentColor: "#667D67",
+    accentColorLight: "rgba(102, 125, 103, 0.15)",
     dos: [
       {
         title: "Offer comfort during wait times",
