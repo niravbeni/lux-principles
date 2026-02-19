@@ -52,8 +52,8 @@ export const principles: Principle[] = [
     description:
       "Observe the person's full life context and frame every product and service not as the correction for a deficit, but as a tool to unlock their unique potential.",
     icon: "👁️",
-    accentColor: "#C792D8",
-    accentColorLight: "rgba(199, 146, 216, 0.15)",
+    accentColor: "#221D1A",
+    accentColorLight: "rgba(34, 29, 26, 0.1)",
     dos: [
       {
         title: "Capture needs from full life context",
@@ -140,8 +140,8 @@ export const principles: Principle[] = [
     description:
       "Reveal progress as it happens, honouring steps both small and significant to build confidence through visible change, not distant goals.",
     icon: "🚀",
-    accentColor: "#FFC943",
-    accentColorLight: "rgba(255, 201, 67, 0.15)",
+    accentColor: "#AD9967",
+    accentColorLight: "rgba(173, 153, 103, 0.15)",
     dos: [
       {
         title: "Show the long view",
@@ -184,8 +184,8 @@ export const principles: Principle[] = [
     description:
       "Ensure consent grounds every moment, building relationships with customers and patients founded on transparency, where the customer feels safe, seen, and held throughout.",
     icon: "🤝",
-    accentColor: "#FF7F50",
-    accentColorLight: "rgba(255, 127, 80, 0.15)",
+    accentColor: "#F15A24",
+    accentColorLight: "rgba(241, 90, 36, 0.12)",
     dos: [
       {
         title: "Give control back",
